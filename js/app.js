@@ -35,13 +35,13 @@ const getApi = async (ticker) => {
     //now save the data into variables 
     const stockName = response.data.Name;
     const stockSymbol = response.data.Symbol;
-    const stockPrice = response2.data["Global Quote"]["05. price"];
-    const stockPriceChange = response2.data["Global Quote"]["09. change"];
+    const stockPrice = formatFloat(response2.data["Global Quote"]["05. price"]);
+    const stockPriceChange = formatFloat(response2.data["Global Quote"]["09. change"]);
     const stockPriceChangePercent = response2.data["Global Quote"]["10. change percent"];
     const stockDescription = response.data.Description;
-    const stockMarketCap = response.data.MarketCapitalization;
-    const stockPriceEarningsRatio = response.data.PERatio;
-    const stockDividendYield = response.data.DividendYield;
+    const stockMarketCap = formatMarketCap(response.data.MarketCapitalization);
+    const stockPriceEarningsRatio = formatFloat(response.data.PERatio);
+    const stockDividendYield = formatFloat(response.data.DividendYield);
 
     //now make a function that will dislay all of this information on screen 
     //pass in all of these variables 

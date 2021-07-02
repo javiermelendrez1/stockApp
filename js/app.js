@@ -10,8 +10,16 @@ theForm.addEventListener('submit', (e) => {
     console.log('the ticker symbol you entered is ', userInput);
     //reset the form
     theForm.reset();
-    //now that we have user input we are going to call the api for that specific ticker symbol
-    getApi(userInput);
+
+    //check if the user input is acceptable 
+    if (validateInput(userInput)) {
+        //now that we have user input we are going to call the api for that specific ticker symbol
+        getApi(userInput);
+    } else {
+        alert('yeah we cant accept that bro');
+        console.log(userInput.length);
+    }
+
 
 })
 //create async function to fetch api and its data

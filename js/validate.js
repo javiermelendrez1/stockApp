@@ -5,11 +5,30 @@
 
 //create a function to make sure the input received is only letters 
 const validateInput = (ticker) => {
-    var letters = /^[A-Za-z]+$/;
+    let letters = /^[A-Za-z]+$/;
     if (ticker.match(letters)) {
-        return true;
+        //we need another if statement in here to check the length of the ticker 
+        //stock tickers are no greater than 5 letters 
+        if (ticker.length > 5) {
+            return false
+        } else {
+            return true;
+        }
+
+
+
     } else {
         return false
     };
     //if you get anything but a letter false will be returned 
+}
+//we are going to create a function to check for wether if the user ticker entered is undefined 
+const isUndefined = (ticker) => {
+    let u = "undefined";
+    //check if the ticker is equal to this u string 
+    if(ticker === undefined){
+        return true;
+    } else {
+        return false;
+    }
 }

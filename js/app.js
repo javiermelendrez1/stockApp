@@ -14,6 +14,7 @@ theForm.addEventListener('submit', (e) => {
     //check if the user input is acceptable 
     if (validateInput(userInput)) {
         //now that we have user input we are going to call the api for that specific ticker symbol
+
         getApi(userInput);
     } else {
         alert('yeah we cant accept that bro');
@@ -51,9 +52,18 @@ const getApi = async (ticker) => {
     const stockPriceEarningsRatio = formatFloat(response.data.PERatio);
     const stockDividendYield = formatFloat(response.data.DividendYield);
 
+    //we have to do a check right here to see if the user ticker search brings up undefined 
+    if(isUndefined(stockName)){
+        //if this returns true print error
+        //if it does not print data
+        printError();
+    } else {
+            
     //now make a function that will dislay all of this information on screen 
     //pass in all of these variables 
-    printData(stockName, stockSymbol, stockPrice, stockPriceChange, stockPriceChangePercent, stockDescription, stockMarketCap, stockPriceEarningsRatio, stockDividendYield);
+    printData(stockName, stockSymbol, stockPrice, stockPriceChange, stockPriceChangePercent, stockDescription, stockMarketCap, stockPriceEarningsRatio, stockDividendYield);PageTransitionEvent
+    }
+
 }
 //query for div that will hold ticker info
 const tickerInfoDiv = document.querySelector('#tickerInfo');
@@ -77,6 +87,13 @@ const printData = (name, symbol, price, priceChange, priceChangePercent, descrip
     <span class="dividendYield">${dividendYield}</span>
 </div>`;
 
+    tickerInfoDiv.innerHTML = data;
+
+}
+
+//going to create a second print function to print when the user search brings up undefined 
+const printError = () => {
+    let data = `<h1>error</h1>`;
     tickerInfoDiv.innerHTML = data;
 
 }

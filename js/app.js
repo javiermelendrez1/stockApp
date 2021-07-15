@@ -31,15 +31,15 @@ const getApi = async (ticker) => {
     //we need a second response because it is two different api fetches 
     const response2 = await axios.get(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=GJDAGA8VL2CMHAOX`);
     //print to console log the response
-    console.log(response2.data["Global Quote"]["05. price"]);
-    console.log(response2.data["Global Quote"]["09. change"]);
-    console.log(response2.data["Global Quote"]["10. change percent"]);
-    console.log(response.data.Name);
-    console.log(response.data.Symbol);
-    console.log(response.data.Description);
-    console.log(response.data.MarketCapitalization);
-    console.log(response.data.PERatio);
-    console.log(response.data.DividendYield);
+    // console.log(response2.data["Global Quote"]["05. price"]);
+    // console.log(response2.data["Global Quote"]["09. change"]);
+    // console.log(response2.data["Global Quote"]["10. change percent"]);
+    // console.log(response.data.Name);
+    // console.log(response.data.Symbol);
+    // console.log(response.data.Description);
+    // console.log(response.data.MarketCapitalization);
+    // console.log(response.data.PERatio);
+    // console.log(response.data.DividendYield);
 
     //now save the data into variables 
     const stockName = response.data.Name;
@@ -72,19 +72,41 @@ const tickerInfoDiv = document.querySelector('#tickerInfo');
 const printData = (name, symbol, price, priceChange, priceChangePercent, description, marketCap, priceEarningsRatio, dividendYield) => {
     //set the inner html equal to the dagta variable
     let data = `    <div class="container" id="tickerInfo">
-    <span class="stockName">${name}</span><span class="tickerSymbol">(${symbol})<br></span>
-    <span class="stockPrice">$${price}</span><span class="stockPriceChange"> ${priceChange}</span><span
-        class="stockPricePercentChange">(${priceChangePercent})<br></span>
+    <p class="stockName text-center">${name} (${symbol})</p>
+    <p class="stockPrice text-center">$${price}</p>
+    <p class="stockPriceChange text-center"> ${priceChange} (${priceChangePercent})</p>
     <span>About<br></span>
-    <span class="companyDescription">
-    ${description}<br>
-    </span>
-    <span>Market Capitalization<br></span>
-    <span class="marketCap">${marketCap}<br></span>
-    <span>Price Earnings Ratio<br></span>
-    <span class="priceEarningsRatio">${priceEarningsRatio}<br></span>
-    <span>Dividend Yeild<br></span>
-    <span class="dividendYield">${dividendYield}</span>
+    <p class="companyDescription">
+    ${description}
+    </p>
+    <div class="container">
+    <div class="row">
+        <div class="col-md">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Market Capitalization</h5>
+                    <p class="card-text">${marketCap}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Price Earnings Ratio</h5>
+                    <p class="card-text">${priceEarningsRatio}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Dividend Yield</h5>
+                    <p class="card-text">${dividendYield}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>`;
 
     tickerInfoDiv.innerHTML = data;
@@ -97,3 +119,9 @@ const printError = () => {
     tickerInfoDiv.innerHTML = data;
 
 }
+
+$('#bologna-list a').on('click', function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  })
+
